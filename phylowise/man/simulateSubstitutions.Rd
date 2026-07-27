@@ -35,6 +35,14 @@ simulateSubstitutions(
 }
 \value{
 Two trees, with branch lengths set to either subst. rates or counts, and two vectors, one of true branch rates and one of estimated branch rates (i.e., count divided by time, which can evaluate to zero)
+XXX TODO EXAMPLES XXX
+XXX
+XXX
+XXX
+XXX
+XXX
+XXX
+XXX
 }
 \description{
 Simulate a substitution count down each branch of a tree. First, the branch rates are sampled from a correlated, uncorrelated, or OU process that can be dependent on traits.

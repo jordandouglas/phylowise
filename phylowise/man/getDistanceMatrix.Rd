@@ -15,3 +15,8 @@ A distance matrix, where dij is the mean distance from leaf i and j to their anc
 \description{
 Build a distance matrix from a tree (time tree or substitution tree)
 }
+\examples{
+# Sample a coalescent tree with 10 taxa and then build a distance matrix
+tree <- ape::rcoal(10)
+dmat <- getDistanceMatrix(tree)
+}

@@ -27,7 +27,15 @@ plotPairs(
 
 \item{edge.width.pairs}{edge line width of paired branches}
 
-\item{label.cex}{tree tip label font size, if show.tip.label=TRUE}
+\item{label.cex}{tree tip label font size, if show.tip.label=TRUE
+XXX TODO EXAMPLES XXX
+XXX
+XXX
+XXX
+XXX
+XXX
+XXX
+XXX}
 }
 \description{
 Plot a set of sampled pairs onto a tree

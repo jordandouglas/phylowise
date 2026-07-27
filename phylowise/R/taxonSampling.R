@@ -450,6 +450,14 @@ sampleTaxonPairs = function(subst.tree, covariate, dist.min, dist.max=Inf, respo
 #' @param edge.width edge line width of all branches on the tree
 #' @param edge.width.pairs edge line width of paired branches 
 #' @param label.cex tree tip label font size, if show.tip.label=TRUE  
+#' XXX TODO EXAMPLES XXX
+#' XXX
+#' XXX
+#' XXX
+#' XXX
+#' XXX
+#' XXX
+#' XXX
 #' @export
 plotPairs = function(tree, pairs.df, edge.col="red", show.tip.label=F, edge.width=1, edge.width.pairs=3, label.cex=1){
 

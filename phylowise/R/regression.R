@@ -12,6 +12,15 @@
 #' @param OR Occam's window for Bayesian model averaging (see BMA::bic.glm)
 #' @param epsilon precision of BMA probabilities for Bayes factor calculation: p<epsilon and p>1-epsilon will be respectively set to epsilon and 1-epsilon to avoid NaN calculations
 #' @return Vector of p-values and Pearson correlations (one element per trait), a data frame of standardised and logged datapoints for doing regression, and posterior probabilities / Bayes factors from BMA analyses
+#' @examples
+#' XXX TODO EXAMPLES XXX
+#' XXX
+#' XXX
+#' XXX
+#' XXX
+#' XXX
+#' XXX
+#' XXX
 #' @export
 PPC.test = function(pairs.df, standardise=2, logY=TRUE, extreme.value.threshold=0, prior.weight=0.5, OR=1000, epsilon=1e-6){
 

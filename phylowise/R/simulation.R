@@ -8,6 +8,14 @@
 #' @param sigma standard deviation for BM
 #' @param root.value trait value at the root of the tree
 #' @return A vector of traits, one element for each node in the tree, ordered by node number
+#' XXX TODO EXAMPLES XXX
+#' XXX
+#' XXX
+#' XXX
+#' XXX
+#' XXX
+#' XXX
+#' XXX
 #' @export 
 simulateTrait = function(time.tree, sigma=1, root.value=0) {
 
@@ -85,6 +93,14 @@ simulateTrait = function(time.tree, sigma=1, root.value=0) {
 #' @param number.of.subst expected number of substitutions per unit of time
 #' @param method clock model may be uncorrelated lognormal (UCLN), autocorrelated lognormal (AC), or trait dependent (TD)
 #' @return Two trees, with branch lengths set to either subst. rates or counts, and two vectors, one of true branch rates and one of estimated branch rates (i.e., count divided by time, which can evaluate to zero)
+#' XXX TODO EXAMPLES XXX
+#' XXX
+#' XXX
+#' XXX
+#' XXX
+#' XXX
+#' XXX
+#' XXX
 #' @export 
 simulateSubstitutions = function(time.tree, nu=0.5, sigma=0.5, beta=0.5, theta=1, traits=NULL, number.of.subst=1000, method=c("AC", "UCLN", "TD")) {
 

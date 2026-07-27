@@ -37,3 +37,13 @@ Vector of p-values and Pearson correlations (one element per trait), a data fram
 Phylogenetic pairwise contrast test on a series of taxon pairs, using ordinary least squares and Bayesian model averging (BMA).
 This method does not do multivariate regression, but it returns the data frame that can be used for it
 }
+\examples{
+XXX TODO EXAMPLES XXX
+XXX
+XXX
+XXX
+XXX
+XXX
+XXX
+XXX
+}
