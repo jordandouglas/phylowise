@@ -1,0 +1,19 @@
+Package: phylowise
+Title: Phylogenetic Pairwise Contrasts for Identifying Drivers of Molecular Rate Variation
+Version: 0.0.0.9000
+Authors@R: 
+    person("Jordan", "Douglas", email="jordan.douglas@auckland.ac.nz", role=c("aut", "cre"))
+Description: What the package does (one paragraph).
+License: `use_gpl3_license()` 
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 8.0.0
+URL: https://github.com/jordandouglas/phylowise
+Depends:
+    ape,
+    BMA
+Imports:
+    Rcpp
+LinkingTo: 
+    Rcpp
+    
