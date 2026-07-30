@@ -1,9 +1,12 @@
 Package: phylowise
-Title: Phylogenetic Pairwise Contrasts for Identifying Drivers of Molecular Rate Variation
-Version: 0.0.0.9000
+Title: Phylogenetic Pairwise Contrasts
+Version: 0.0.1
 Authors@R: 
-    person("Jordan", "Douglas", email="jordan.douglas@auckland.ac.nz", role=c("aut", "cre"))
-Description: A phylogenetic comparative method for finding associations between biological traits and molecular rates
+    c(person(given="Jordan", family="Douglas", email="jordan.douglas@auckland.ac.nz", role=c("aut", "cre")),
+    person(given="Lindell", family="Bromham"))
+Maintainer: Jordan Douglas <jordan.douglas@auckland.ac.nz>
+Author: Jordan Douglas [aut, cre]
+Description: A phylogenetic comparative method for finding associations between biological traits and molecular evolutionary rates. The method samples pairs from a phylogeny such that each pair has non-overlapping edge paths, and can therefore be treated as statistically independent observations. Linear regression is performed on the pair contrasts. This approach is similar to phylogenetically independent contrasts (PIC) but without reconstructing the traits at internal nodes, and is better suited for finding trait-rate associations than phylogenetic generalised least squares (PGLS).
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

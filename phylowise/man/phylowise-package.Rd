@@ -4,9 +4,9 @@
 \name{phylowise-package}
 \alias{phylowise}
 \alias{phylowise-package}
-\title{phylowise: Phylogenetic Pairwise Contrasts for Identifying Drivers of Molecular Rate Variation}
+\title{phylowise: Phylogenetic Pairwise Contrasts}
 \description{
-A phylogenetic comparative method for finding associations between biological traits and molecular rates
+A phylogenetic comparative method for finding associations between biological traits and molecular evolutionary rates. The method samples pairs from a phylogeny such that each pair has non-overlapping edge paths, and can therefore be treated as statistically independent observations. Linear regression is performed on the pair contrasts. This approach is similar to phylogenetically independent contrasts (PIC) but without reconstructing the traits at internal nodes, and is better suited for finding trait-rate associations than phylogenetic generalised least squares (PGLS).
 }
 \seealso{
 Useful links:
@@ -21,6 +21,11 @@ Useful links:
 Authors:
 \itemize{
   \item Jordan Douglas \email{jordan.douglas@auckland.ac.nz}
+}
+
+Other contributors:
+\itemize{
+  \item Lindell Bromham
 }
 
 }
