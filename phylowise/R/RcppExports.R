@@ -4,6 +4,7 @@
 #' Build a cached tree adjacency structure
 #'
 #' @param edge Integer matrix, the tree's edge matrix
+#' @param root the node number of the root
 #' @return An external pointer to the cached structure
 #' @export
 rcpp_buildTree <- function(edge, root) {
@@ -33,6 +34,9 @@ rcpp_getNonDescendantsFast <- function(tree_ptr, node, nleaves) {
 }
 
 #' Get the path between two nodes in a tree
+#' @param tree_ptr External pointer from rcpp_buildTree()
+#' @param from Node number at the start of the path
+#' @param to Node number at the start of the path
 rcpp_nodepathFast <- function(tree_ptr, from, to) {
     .Call(`_phylowise_rcpp_nodepathFast`, tree_ptr, from, to)
 }
@@ -40,8 +44,8 @@ rcpp_nodepathFast <- function(tree_ptr, from, to) {
 #' Fast MRCA using cached depth + parent lookup
 #'
 #' @param tree_ptr External pointer from rcpp_buildTree()
-#' @param a Integer node ID (e.g. tip index)
-#' @param b Integer node ID (e.g. tip index)
+#' @param a Node number of one descendent
+#' @param b Node number of the other descendent
 #' @return Integer node ID of the most recent common ancestor
 #' @export
 rcpp_getMRCA <- function(tree_ptr, a, b) {

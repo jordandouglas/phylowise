@@ -15,15 +15,14 @@ simulateTrait(time.tree, sigma = 1, root.value = 0)
 }
 \value{
 A vector of traits, one element for each node in the tree, ordered by node number
-XXX TODO EXAMPLES XXX
-XXX
-XXX
-XXX
-XXX
-XXX
-XXX
-XXX
 }
 \description{
 Simulate a trait down a tree using Brownian motion (BM)
+}
+\examples{
+# Sample a birth-death tree with 50 taxa
+time.tree <- ape::rphylo(birth=10, death=5, n=50)
+
+# Simulate traits down the tree under Brownian motion
+traits <- simulateTrait(time.tree)
 }

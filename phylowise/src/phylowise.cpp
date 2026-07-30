@@ -18,6 +18,7 @@ struct TreeAdjacency {
 //' Build a cached tree adjacency structure
 //'
 //' @param edge Integer matrix, the tree's edge matrix
+//' @param root the node number of the root
 //' @return An external pointer to the cached structure
 //' @export
 // [[Rcpp::export]]
@@ -133,6 +134,9 @@ IntegerVector rcpp_getNonDescendantsFast(SEXP tree_ptr, int node, int nleaves) {
 
 
 //' Get the path between two nodes in a tree
+//' @param tree_ptr External pointer from rcpp_buildTree()
+//' @param from Node number at the start of the path
+//' @param to Node number at the start of the path
 // [[Rcpp::export]]
 IntegerVector rcpp_nodepathFast(SEXP tree_ptr, int from, int to) {
   XPtr<TreeAdjacency> tree(tree_ptr);
@@ -203,8 +207,8 @@ IntegerVector rcpp_nodepathFast(SEXP tree_ptr, int from, int to) {
 //' Fast MRCA using cached depth + parent lookup
 //'
 //' @param tree_ptr External pointer from rcpp_buildTree()
-//' @param a Integer node ID (e.g. tip index)
-//' @param b Integer node ID (e.g. tip index)
+//' @param a Node number of one descendent
+//' @param b Node number of the other descendent
 //' @return Integer node ID of the most recent common ancestor
 //' @export
 // [[Rcpp::export]]

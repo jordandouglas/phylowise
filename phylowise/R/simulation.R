@@ -8,14 +8,12 @@
 #' @param sigma standard deviation for BM
 #' @param root.value trait value at the root of the tree
 #' @return A vector of traits, one element for each node in the tree, ordered by node number
-#' XXX TODO EXAMPLES XXX
-#' XXX
-#' XXX
-#' XXX
-#' XXX
-#' XXX
-#' XXX
-#' XXX
+#' @examples
+#' # Sample a birth-death tree with 50 taxa
+#' time.tree <- ape::rphylo(birth=10, death=5, n=50)
+#'
+#' # Simulate traits down the tree under Brownian motion
+#' traits <- simulateTrait(time.tree)
 #' @export 
 simulateTrait = function(time.tree, sigma=1, root.value=0) {
 
@@ -25,7 +23,7 @@ simulateTrait = function(time.tree, sigma=1, root.value=0) {
 		stop("time.tree must be a phylo object!")
 	}
 
-		if (!is.rooted(time.tree) || !is.binary(time.tree)){
+		if (!ape::is.rooted(time.tree) || !ape::is.binary(time.tree)){
 		stop("time.tree must be rooted and binary!")
 	}
 
@@ -81,7 +79,8 @@ simulateTrait = function(time.tree, sigma=1, root.value=0) {
 
 
 
-#' Simulate a substitution count down each branch of a tree. First, the branch rates are sampled from a correlated, uncorrelated, or OU process that can be dependent on traits. 
+#' Simulate a substitution count down each branch of a tree. First, the branch rates are sampled 
+#' from a correlated, uncorrelated, or OU process that can be dependent on traits. 
 #' Then the number of substitutions along each branch is sampled from a Poisson distribution.
 #'
 #' @param time.tree a binary rooted tree (phylo object)
@@ -89,20 +88,42 @@ simulateTrait = function(time.tree, sigma=1, root.value=0) {
 #' @param sigma standard deviation of UCLN
 #' @param theta theta term for OU process in TD
 #' @param beta effect size of traits on rates (if traits is not NULL)
-#' @param traits one trait per node; leave as NULL if rates are conditionally independent of traits
+#' @param traits one trait per node; set to NULL if rates are conditionally independent of traits
 #' @param number.of.subst expected number of substitutions per unit of time
-#' @param method clock model may be uncorrelated lognormal (UCLN), autocorrelated lognormal (AC), or trait dependent (TD)
-#' @return Two trees, with branch lengths set to either subst. rates or counts, and two vectors, one of true branch rates and one of estimated branch rates (i.e., count divided by time, which can evaluate to zero)
-#' XXX TODO EXAMPLES XXX
-#' XXX
-#' XXX
-#' XXX
-#' XXX
-#' XXX
-#' XXX
-#' XXX
+#' @param method clock model may be uncorrelated lognormal (UCLN), 
+#'								autocorrelated lognormal (AC), or trait dependent (TD)
+#' @return Two trees, with branch lengths set to either subst. rates or counts, and two vectors, 
+#'				one of true branch rates and one of estimated branch rates 
+#'				(i.e., count divided by time, which can evaluate to zero)
+#' @examples
+#' # Sample a birth-death tree with 50 taxa
+#' time.tree <- ape::rphylo(birth=10, death=5, n=50)
+#'
+#' # Simulate traits down the tree under Brownian motion
+#' traits <- simulateTrait(time.tree)
+#'
+#' # Simulate substitutions that have a positive association with traits, 
+#  # and 10000 substitutions per unit of time
+#' sim.result <- simulateSubstitutions(time.tree=time.tree, 
+#'																			beta=1, 
+#'																			theta=10, 
+#'																			sigma=0.5, 
+#'																			traits=traits, 
+#'																			method="TD", 
+#'																			number.of.subst=10000)
+#' subst.tree <- sim.result$subst.tree.est
+#' node.rates <- sim.result$node.rates.est
+#' plot(subst.tree)
+#' axis(1)
+#'
+#' # Simulate substitutions under a Brownian autocorrelated clock, 
+#' # with no association with traits
+#' sim.result.brownian <- simulateSubstitutions(time.tree=time.tree, 
+#'																								sigma=0.5, 
+#'																								method="AC", 
+#'																								number.of.subst=10000)
 #' @export 
-simulateSubstitutions = function(time.tree, nu=0.5, sigma=0.5, beta=0.5, theta=1, traits=NULL, number.of.subst=1000, method=c("AC", "UCLN", "TD")) {
+simulateSubstitutions = function(time.tree, nu=0.5, sigma=0.5, beta=0, theta=1, traits=NULL, number.of.subst=1000, method=c("AC", "UCLN", "TD")) {
 
 
 	# Validation
@@ -110,7 +131,7 @@ simulateSubstitutions = function(time.tree, nu=0.5, sigma=0.5, beta=0.5, theta=1
 		stop("time.tree must be a phylo object!")
 	}
 
-	if (!is.rooted(time.tree) || !is.binary(time.tree)){
+	if (!ape::is.rooted(time.tree) || !ape::is.binary(time.tree)){
 		stop("tree must be rooted and binary!")
 	}
 

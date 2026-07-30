@@ -9,9 +9,9 @@ rcpp_getMRCA(tree_ptr, a, b)
 \arguments{
 \item{tree_ptr}{External pointer from rcpp_buildTree()}
 
-\item{a}{Integer node ID (e.g. tip index)}
+\item{a}{Node number of one descendent}
 
-\item{b}{Integer node ID (e.g. tip index)}
+\item{b}{Node number of the other descendent}
 }
 \value{
 Integer node ID of the most recent common ancestor

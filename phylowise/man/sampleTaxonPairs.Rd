@@ -2,9 +2,11 @@
 % Please edit documentation in R/taxonSampling.R
 \name{sampleTaxonPairs}
 \alias{sampleTaxonPairs}
-\title{Sample a set of taxon pairs from the tree. These taxa will have non-overlapping edges between their paths and can this be treated as statistcially independent.
-The algorithm iteratively searches for two random taxa that satisfy sampling requirements until there are no more valid pairs. Each pair must descend from an MRCA
-with dist.min <= tMRCA <=  dist.max. c++ is used to speed up the runtime of this code.}
+\title{Sample a set of taxon pairs from the tree. These taxa will have non-overlapping edges
+between their paths and can this be treated as statistically independent. The algorithm
+iteratively searches for two random taxa that satisfy sampling requirements until there
+are no more valid pairs. Each pair must descend from an MRCA with
+dist.min <= tMRCA <= dist.max. c++ is used to speed up the runtime of this code.}
 \usage{
 sampleTaxonPairs(
   subst.tree,
@@ -23,11 +25,14 @@ sampleTaxonPairs(
 \arguments{
 \item{subst.tree}{a binary rooted tree, with branch lengths in units of change (phylo object)}
 
-\item{covariate}{a data frame of traits at the tips of the tree (rows are taxa, columns are traits); rows should be in the same order as tips in the tree}
+\item{covariate}{a data frame of traits at the tips of the tree (rows are taxa, columns are traits);
+rows should be in the same order as tips in the tree}
 
-\item{dist.min}{minimum distance that two tips must be apart from their ancestor (mean of both distances), on window.tree}
+\item{dist.min}{minimum distance that two tips must be apart from their ancestor
+(mean of both distances), on window.tree}
 
-\item{dist.max}{maximum distance that two tips must be apart from their ancestor (mean of both distances), on window.tree}
+\item{dist.max}{maximum distance that two tips must be apart from their ancestor
+(mean of both distances), on window.tree}
 
 \item{response}{provide a vector as a response trait instead of genetic distances in the tree (optional)}
 
@@ -37,7 +42,8 @@ sampleTaxonPairs(
 
 \item{youngest}{take the youngest pair at each step (and therefore increase the number of pairs)?}
 
-\item{window.tree}{tree that is the basis for building the distance matrix, if it is not provided; should have same taxa as 'tree'}
+\item{window.tree}{tree that is the basis for building the distance matrix, if it is not provided;
+should have same taxa as 'tree'}
 
 \item{distance.matrix}{provide an n x n distance matrix rather than recalculate from scratch}
 
@@ -47,7 +53,53 @@ sampleTaxonPairs(
 A data frame, where each row is a pair of taxa.
 }
 \description{
-Sample a set of taxon pairs from the tree. These taxa will have non-overlapping edges between their paths and can this be treated as statistcially independent.
-The algorithm iteratively searches for two random taxa that satisfy sampling requirements until there are no more valid pairs. Each pair must descend from an MRCA
-with dist.min <= tMRCA <=  dist.max. c++ is used to speed up the runtime of this code.
+Sample a set of taxon pairs from the tree. These taxa will have non-overlapping edges
+between their paths and can this be treated as statistically independent. The algorithm
+iteratively searches for two random taxa that satisfy sampling requirements until there
+are no more valid pairs. Each pair must descend from an MRCA with
+dist.min <= tMRCA <= dist.max. c++ is used to speed up the runtime of this code.
+}
+\examples{
+# Sample a birth-death tree with 100 taxa
+time.tree <- ape::rphylo(birth=10, death=5, n=100)
+ntips = length(time.tree$tip.label)
+
+# Simulate traits down the tree under Brownian motion
+traits1 <- simulateTrait(time.tree)
+traits1.leaf <- traits1[1:ntips]
+
+# Simulate substitutions that have a positive association with traits, 
+sim.result <- simulateSubstitutions(time.tree=time.tree, 
+									beta=1, 
+									theta=10, 
+									traits=traits1, 
+									method="TD", 
+									number.of.subst=10000)
+subst.tree <- sim.result$subst.tree.est
+
+# Sample taxon pairs within a window of (0.01, 0.2) time units
+pairs.df <- sampleTaxonPairs(subst.tree=subst.tree, 
+							covariate=traits1.leaf, 
+							window.tree=time.tree, 
+							dist.min=0.01, dist.max=0.2)
+
+# If iterating this, we can precompute the distance matrix to save time
+dmat <- getDistanceMatrix(time.tree)
+for (i in 1:100){
+    pairs.df <- sampleTaxonPairs(subst.tree=subst.tree, 
+								covariate=traits1.leaf, 
+								distance.matrix=dmat, 
+								dist.min=0.01, 
+								dist.max=0.2)
+}
+
+# We can also do this with traits-vs-traits rather than rates-vs-traits
+traits2 <- simulateTrait(time.tree) # Unassociated with traits1
+traits2.leaf <- traits2[1:ntips]
+pairs.df <- sampleTaxonPairs(subst.tree=subst.tree, 
+							response=traits1.leaf, 
+							covariate=traits2.leaf, 
+							window.tree=time.tree, 
+							dist.min=0.01, 
+							dist.max=0.2)
 }

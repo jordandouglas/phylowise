@@ -6,7 +6,7 @@
 \alias{phylowise-package}
 \title{phylowise: Phylogenetic Pairwise Contrasts for Identifying Drivers of Molecular Rate Variation}
 \description{
-What the package does (one paragraph).
+A phylogenetic comparative method for finding associations between biological traits and molecular rates
 }
 \seealso{
 Useful links:

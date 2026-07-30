@@ -8,7 +8,7 @@ plotPairs(
   tree,
   pairs.df,
   edge.col = "red",
-  show.tip.label = F,
+  show.tip.label = FALSE,
   edge.width = 1,
   edge.width.pairs = 3,
   label.cex = 1
@@ -27,16 +27,38 @@ plotPairs(
 
 \item{edge.width.pairs}{edge line width of paired branches}
 
-\item{label.cex}{tree tip label font size, if show.tip.label=TRUE
-XXX TODO EXAMPLES XXX
-XXX
-XXX
-XXX
-XXX
-XXX
-XXX
-XXX}
+\item{label.cex}{tree tip label font size, if show.tip.label=TRUE}
 }
 \description{
 Plot a set of sampled pairs onto a tree
+}
+\examples{
+# Sample a birth-death tree with 100 taxa
+time.tree <- ape::rphylo(birth=10, death=5, n=100)
+ntips = length(time.tree$tip.label)
+
+# Simulate traits down the tree under Brownian motion
+traits1 <- simulateTrait(time.tree)
+traits1.leaf <- traits1[1:ntips]
+
+# Simulate substitutions that have a positive association with traits, 
+sim.result <- simulateSubstitutions(time.tree=time.tree, 
+									beta=1, 
+									theta=10, 
+									traits=traits1, 
+									method="TD", 
+									number.of.subst=10000)
+subst.tree <- sim.result$subst.tree.est
+
+# Sample taxon pairs within a window of (0.01, 0.2) time units
+pairs.df <- sampleTaxonPairs(subst.tree=subst.tree, 
+							covariate=traits1.leaf, 
+							window.tree=time.tree, 
+							dist.min=0.01, dist.max=0.2)
+
+# Plot the pairs onto the substitution tree
+plotPairs(subst.tree, pairs.df, show.tip.label=TRUE)
+
+# Plot the pairs onto the time tree
+plotPairs(time.tree, pairs.df, show.tip.label=TRUE, edge.col="#008cba")
 }

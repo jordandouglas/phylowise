@@ -3,8 +3,8 @@ Title: Phylogenetic Pairwise Contrasts for Identifying Drivers of Molecular Rate
 Version: 0.0.0.9000
 Authors@R: 
     person("Jordan", "Douglas", email="jordan.douglas@auckland.ac.nz", role=c("aut", "cre"))
-Description: What the package does (one paragraph).
-License: `use_gpl3_license()` 
+Description: A phylogenetic comparative method for finding associations between biological traits and molecular rates
+License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 8.0.0
@@ -17,4 +17,3 @@ Imports:
     Rcpp
 LinkingTo: 
     Rcpp
-    

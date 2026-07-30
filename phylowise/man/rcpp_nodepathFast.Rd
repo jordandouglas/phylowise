@@ -6,6 +6,13 @@
 \usage{
 rcpp_nodepathFast(tree_ptr, from, to)
 }
+\arguments{
+\item{tree_ptr}{External pointer from rcpp_buildTree()}
+
+\item{from}{Node number at the start of the path}
+
+\item{to}{Node number at the start of the path}
+}
 \description{
 Get the path between two nodes in a tree
 }

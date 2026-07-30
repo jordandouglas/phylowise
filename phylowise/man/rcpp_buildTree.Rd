@@ -8,6 +8,8 @@ rcpp_buildTree(edge, root)
 }
 \arguments{
 \item{edge}{Integer matrix, the tree's edge matrix}
+
+\item{root}{the node number of the root}
 }
 \value{
 An external pointer to the cached structure

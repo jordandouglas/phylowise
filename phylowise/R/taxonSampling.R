@@ -1,22 +1,72 @@
 
 
-#' Sample a set of taxon pairs from the tree. These taxa will have non-overlapping edges between their paths and can this be treated as statistcially independent. 
-#' The algorithm iteratively searches for two random taxa that satisfy sampling requirements until there are no more valid pairs. Each pair must descend from an MRCA
-#' with dist.min <= tMRCA <=  dist.max. c++ is used to speed up the runtime of this code.
+#' Sample a set of taxon pairs from the tree. These taxa will have non-overlapping edges
+#' between their paths and can this be treated as statistically independent. The algorithm  
+#' iteratively searches for two random taxa that satisfy sampling requirements until there 
+#' are no more valid pairs. Each pair must descend from an MRCA with 
+#' dist.min <= tMRCA <= dist.max. c++ is used to speed up the runtime of this code.
 #'
 #'
 #' @param subst.tree a binary rooted tree, with branch lengths in units of change (phylo object)
 #' @param response provide a vector as a response trait instead of genetic distances in the tree (optional)
-#' @param covariate a data frame of traits at the tips of the tree (rows are taxa, columns are traits); rows should be in the same order as tips in the tree
-#' @param dist.min minimum distance that two tips must be apart from their ancestor (mean of both distances), on window.tree
-#' @param dist.max maximum distance that two tips must be apart from their ancestor (mean of both distances), on window.tree
+#' @param covariate a data frame of traits at the tips of the tree (rows are taxa, columns are traits);
+#'					rows should be in the same order as tips in the tree
+#' @param dist.min minimum distance that two tips must be apart from their ancestor
+#' 					(mean of both distances), on window.tree
+#' @param dist.max maximum distance that two tips must be apart from their ancestor 
+#'					(mean of both distances), on window.tree
 #' @param nested can taxon pairs be nested with each other?
 #' @param maximise should we maximise the trait difference?
 #' @param youngest take the youngest pair at each step (and therefore increase the number of pairs)?
-#' @param window.tree tree that is the basis for building the distance matrix, if it is not provided; should have same taxa as 'tree'
+#' @param window.tree tree that is the basis for building the distance matrix, if it is not provided; 
+#'						should have same taxa as 'tree'
 #' @param distance.matrix provide an n x n distance matrix rather than recalculate from scratch
 #' @param verbose print some statements along the way
 #' @return A data frame, where each row is a pair of taxa. 
+#' @examples
+#' # Sample a birth-death tree with 100 taxa
+#' time.tree <- ape::rphylo(birth=10, death=5, n=100)
+#' ntips = length(time.tree$tip.label)
+#'
+#' # Simulate traits down the tree under Brownian motion
+#' traits1 <- simulateTrait(time.tree)
+#' traits1.leaf <- traits1[1:ntips]
+#'
+#' # Simulate substitutions that have a positive association with traits, 
+#  # and 10000 substitutions per unit of time
+#' sim.result <- simulateSubstitutions(time.tree=time.tree, 
+#'										beta=1, 
+#'										theta=10, 
+#'										traits=traits1, 
+#'										method="TD", 
+#'										number.of.subst=10000)
+#' subst.tree <- sim.result$subst.tree.est
+#'
+#' # Sample taxon pairs within a window of (0.01, 0.2) time units
+#' pairs.df <- sampleTaxonPairs(subst.tree=subst.tree, 
+#'								covariate=traits1.leaf, 
+#'								window.tree=time.tree, 
+#'								dist.min=0.01, dist.max=0.2)
+#'
+#' # If iterating this, we can precompute the distance matrix to save time
+#' dmat <- getDistanceMatrix(time.tree)
+#' for (i in 1:100){
+#'     pairs.df <- sampleTaxonPairs(subst.tree=subst.tree, 
+#'									covariate=traits1.leaf, 
+#'									distance.matrix=dmat, 
+#'									dist.min=0.01, 
+#'									dist.max=0.2)
+#' }
+#'
+#' # We can also do this with traits-vs-traits rather than rates-vs-traits
+#' traits2 <- simulateTrait(time.tree) # Unassociated with traits1
+#' traits2.leaf <- traits2[1:ntips]
+#' pairs.df <- sampleTaxonPairs(subst.tree=subst.tree, 
+#'								response=traits1.leaf, 
+#'								covariate=traits2.leaf, 
+#'								window.tree=time.tree, 
+#'								dist.min=0.01, 
+#'								dist.max=0.2)
 #' @export
 sampleTaxonPairs = function(subst.tree, covariate, dist.min, dist.max=Inf, response=NULL, nested=TRUE, maximise=TRUE, youngest=FALSE, window.tree=subst.tree, distance.matrix=NULL, verbose=FALSE){
 
@@ -29,7 +79,7 @@ sampleTaxonPairs = function(subst.tree, covariate, dist.min, dist.max=Inf, respo
 	if (!inherits(subst.tree, "phylo")) {
 		stop("subst.tree must be a phylo object!")
 	}
-	if (!is.rooted(subst.tree) || !is.binary(subst.tree)){
+	if (!ape::is.rooted(subst.tree) || !ape::is.binary(subst.tree)){
 		stop("subst.tree must be rooted and binary!")
 	}
 
@@ -68,7 +118,7 @@ sampleTaxonPairs = function(subst.tree, covariate, dist.min, dist.max=Inf, respo
 			stop("window.tree must be a phylo object!")
 		}
 
-		if (!is.rooted(window.tree) || !is.binary(window.tree)){
+		if (!ape::is.rooted(window.tree) || !ape::is.binary(window.tree)){
 			stop("tree must be rooted and binary!")
 		}
 
@@ -450,16 +500,38 @@ sampleTaxonPairs = function(subst.tree, covariate, dist.min, dist.max=Inf, respo
 #' @param edge.width edge line width of all branches on the tree
 #' @param edge.width.pairs edge line width of paired branches 
 #' @param label.cex tree tip label font size, if show.tip.label=TRUE  
-#' XXX TODO EXAMPLES XXX
-#' XXX
-#' XXX
-#' XXX
-#' XXX
-#' XXX
-#' XXX
-#' XXX
+#' @examples
+#' # Sample a birth-death tree with 100 taxa
+#' time.tree <- ape::rphylo(birth=10, death=5, n=100)
+#' ntips = length(time.tree$tip.label)
+#'
+#' # Simulate traits down the tree under Brownian motion
+#' traits1 <- simulateTrait(time.tree)
+#' traits1.leaf <- traits1[1:ntips]
+#'
+#' # Simulate substitutions that have a positive association with traits, 
+#  # and 10000 substitutions per unit of time
+#' sim.result <- simulateSubstitutions(time.tree=time.tree, 
+#'										beta=1, 
+#'										theta=10, 
+#'										traits=traits1, 
+#'										method="TD", 
+#'										number.of.subst=10000)
+#' subst.tree <- sim.result$subst.tree.est
+#'
+#' # Sample taxon pairs within a window of (0.01, 0.2) time units
+#' pairs.df <- sampleTaxonPairs(subst.tree=subst.tree, 
+#'								covariate=traits1.leaf, 
+#'								window.tree=time.tree, 
+#'								dist.min=0.01, dist.max=0.2)
+#'
+#' # Plot the pairs onto the substitution tree
+#' plotPairs(subst.tree, pairs.df, show.tip.label=TRUE)
+#'
+#' # Plot the pairs onto the time tree
+#' plotPairs(time.tree, pairs.df, show.tip.label=TRUE, edge.col="#008cba")
 #' @export
-plotPairs = function(tree, pairs.df, edge.col="red", show.tip.label=F, edge.width=1, edge.width.pairs=3, label.cex=1){
+plotPairs = function(tree, pairs.df, edge.col="red", show.tip.label=FALSE, edge.width=1, edge.width.pairs=3, label.cex=1){
 
 
 
@@ -502,7 +574,7 @@ plotPairs = function(tree, pairs.df, edge.col="red", show.tip.label=F, edge.widt
 
 
 	# Grab node coordinates created by plot.phylo
-	lp = get("last_plot.phylo", envir = .PlotPhyloEnv)
+	lp = get("last_plot.phylo", envir = ape::.PlotPhyloEnv)
 
 	for (i in 1:nrow(pairs.df)){
 		tip1 = pairs.df[i,"tip1"]
@@ -519,8 +591,8 @@ plotPairs = function(tree, pairs.df, edge.col="red", show.tip.label=F, edge.widt
 		}
 
 		# Get the path between these two, excluding their mrca
-		path = nodepath(tree, index1, index2)
-		mrca = getMRCA(tree, c(index1, index2))
+		path = ape::nodepath(tree, index1, index2)
+		mrca = ape::getMRCA(tree, c(index1, index2))
 		path = path[path != mrca]
 		for (child in path){
 
