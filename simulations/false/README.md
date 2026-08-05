@@ -12,17 +12,17 @@ The simulations consist of three components:
 The following comparative methods will test for an association between rates and traits. Because traits are independent of rates, we would hope for all p-values to be distributed as Uniform(0,1).
 
 1. Phylogenetic pairwise contrasts (PPC)
-- No nesting, no maximisation
-- No nesting, maximisation
-- Nesting, no maximisation
-- Nesting,  maximisation
+-- No nesting, no maximisation
+-- No nesting, maximisation
+-- Nesting, no maximisation
+-- Nesting,  maximisation
 2. Ordinary least squares (OLS)
 3. Phylogenetic generalised least squares (PGLS)
-- Brownian
-- Pagel
-- Grafen
-- Martins
-- Blomberg
+-- Brownian
+-- Pagel
+-- Grafen
+-- Martins
+-- Blomberg
 
 These will be run across different error models of trait and rate.
 	
@@ -46,12 +46,12 @@ Rscript runFP.R false1.tsv
 ```
 where `false1.tsv` is the output file. You can run multiple replicates in parallel, making sure to save each to a different file. Make sure that all outfiles follow the pattern `false*.tsv` so they can be easily plotted.
 
-Optionally, you can skip PGLS and only do PPC using
+Optionally, you can skip OLS/PGLS and only do PPC using
 ```
 Rscript runFP.R false.ppc.1.tsv TRUE
 ```
 
-or skip PPC and only do PGLS using
+or skip PPC and only do OLS/PGLS using
 ```
 Rscript runFP.R false.pgls.1.tsv FALSE TRUE
 ```
