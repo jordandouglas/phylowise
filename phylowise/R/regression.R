@@ -7,15 +7,15 @@
 #'
 #' @param pairs.df data frame of taxon pairs
 #' @param logY should we take the logarithm of the evolutionary distance? default and recommended setting: true
-#' @param standardise should we standardise the evolutionary distance? 0 for no, 1 for standardise by sqrt(distance), 
-#'						2 for standardise by sqrt(mrca age), 3 for standarise by mrca age. default and recommended setting: 2
+#' @param standardise should we standardise the evolutionary distance? 0 for no, 1 to standardise by sqrt(distance), 
+#'						2 to standardise by sqrt(mrca age), 3 to standarise by mrca age. default and recommended setting: 2
 #' @param extreme.value.threshold remove any observations more than this many standard deviations away from 
-#'									the mean (distance); set to zero for no extreme value removal
+#'									the mean response variable; set to zero for no extreme value removal
 #' @param prior.weight trait inclusion prior probbaility for Bayesian model averaging (see BMA::bic.glm)
 #' @param OR Occam's window for Bayesian model averaging (see BMA::bic.glm)
-#' @param epsilon precision of BMA probabilities for Bayes factor calculation: p<epsilon and p>1-epsilon
+#' @param epsilon precision of BMA probabilities for Bayes factor calculation: p < epsilon and p > 1-epsilon
 #'				 	will be respectively set to epsilon and 1-epsilon to avoid NaN calculations
-#' @return Vector of p-values and Pearson correlations (one element per trait), a data frame of 
+#' @return A vector of p-values and Pearson correlations (one element per trait), a data frame of 
 #'		   standardised and logged datapoints for doing regression, and posterior probabilities /
 #'		   Bayes factors from BMA analyses
 #' @examples
@@ -27,8 +27,7 @@
 #' traits1 <- simulateTrait(time.tree)
 #' traits1.leaf <- traits1[1:ntips]
 #'
-#' # Simulate substitutions that have a positive association with traits, 
-#  # and 10000 substitutions per unit of time
+#' # Simulate substitutions that have a positive association with traits
 #' sim.result <- simulateSubstitutions(time.tree=time.tree, 
 #'										beta=2, 
 #'										theta=10, 
@@ -46,9 +45,11 @@
 #' # Perform linear regression on the pairs
 #' ppc <- PPC.test(pairs.df)
 #' p.value <- ppc$p.var
+#' pearson <- ppc$rho.var
+#' inclusion.prob <- ppc$bma.probs
+#' bayes.factor <- ppc$bma.bf
 #'
-#' # Plot the pairs. Depending on the random seed, we should usually
-#' #  see a clear positive trend under these parameters
+#' # Plot the pairs. Should see a positive trend under these parameters
 #' data.df <- ppc$data.df
 #' plot(data.df$trait, data.df$distance.response, xlab="Trait contrast", ylab="Distance contrast")
 #' @export

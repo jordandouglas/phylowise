@@ -79,8 +79,8 @@ simulateTrait = function(time.tree, sigma=1, root.value=0) {
 
 
 
-#' Simulate a substitution count down each branch of a tree. First, the branch rates are sampled 
-#' from a correlated, uncorrelated, or OU process that can be dependent on traits. 
+#' Simulate a substitution count down each branch of a tree. First, the branch rates are  
+#' sampled from a correlated, uncorrelated or OU process that can be dependent on traits. 
 #' Then the number of substitutions along each branch is sampled from a Poisson distribution.
 #'
 #' @param time.tree a binary rooted tree (phylo object)
@@ -102,26 +102,24 @@ simulateTrait = function(time.tree, sigma=1, root.value=0) {
 #' # Simulate traits down the tree under Brownian motion
 #' traits <- simulateTrait(time.tree)
 #'
-#' # Simulate substitutions that have a positive association with traits, 
-#  # and 10000 substitutions per unit of time
+#' # Simulate substitutions that have a positive association with traits 
 #' sim.result <- simulateSubstitutions(time.tree=time.tree, 
-#'																			beta=1, 
-#'																			theta=10, 
-#'																			sigma=0.5, 
-#'																			traits=traits, 
-#'																			method="TD", 
-#'																			number.of.subst=10000)
+#'									beta=1, 
+#'									theta=10, 
+#'									sigma=0.5, 
+#'									traits=traits, 
+#'									method="TD", 
+#'									number.of.subst=10000)
 #' subst.tree <- sim.result$subst.tree.est
 #' node.rates <- sim.result$node.rates.est
 #' plot(subst.tree)
 #' axis(1)
 #'
-#' # Simulate substitutions under a Brownian autocorrelated clock, 
-#' # with no association with traits
+#' # Simulate substitutions with no association with traits (Brownian)
 #' sim.result.brownian <- simulateSubstitutions(time.tree=time.tree, 
-#'																								sigma=0.5, 
-#'																								method="AC", 
-#'																								number.of.subst=10000)
+#'										sigma=0.5, 
+#'										method="AC", 
+#'										number.of.subst=10000)
 #' @export 
 simulateSubstitutions = function(time.tree, nu=0.5, sigma=0.5, beta=0, theta=1, traits=NULL, number.of.subst=1000, method=c("AC", "UCLN", "TD")) {
 

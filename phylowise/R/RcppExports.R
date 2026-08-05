@@ -6,7 +6,7 @@
 #' @param edge Integer matrix, the tree's edge matrix
 #' @param root the node number of the root
 #' @return An external pointer to the cached structure
-#' @export
+#' @noRd
 rcpp_buildTree <- function(edge, root) {
     .Call(`_phylowise_rcpp_buildTree`, edge, root)
 }
@@ -17,7 +17,7 @@ rcpp_buildTree <- function(edge, root) {
 #' @param node Integer node ID
 #' @param nleaves Integer number of leaves
 #' @return Integer vector of descendant node IDs
-#' @export
+#' @noRd
 rcpp_getDescendantsFast <- function(tree_ptr, node, nleaves) {
     .Call(`_phylowise_rcpp_getDescendantsFast`, tree_ptr, node, nleaves)
 }
@@ -28,7 +28,7 @@ rcpp_getDescendantsFast <- function(tree_ptr, node, nleaves) {
 #' @param node Integer node ID
 #' @param nleaves Integer number of leaves
 #' @return Integer vector of descendant node IDs
-#' @export
+#' @noRd
 rcpp_getNonDescendantsFast <- function(tree_ptr, node, nleaves) {
     .Call(`_phylowise_rcpp_getNonDescendantsFast`, tree_ptr, node, nleaves)
 }
@@ -37,6 +37,7 @@ rcpp_getNonDescendantsFast <- function(tree_ptr, node, nleaves) {
 #' @param tree_ptr External pointer from rcpp_buildTree()
 #' @param from Node number at the start of the path
 #' @param to Node number at the start of the path
+#' @noRd
 rcpp_nodepathFast <- function(tree_ptr, from, to) {
     .Call(`_phylowise_rcpp_nodepathFast`, tree_ptr, from, to)
 }
@@ -47,7 +48,7 @@ rcpp_nodepathFast <- function(tree_ptr, from, to) {
 #' @param a Node number of one descendent
 #' @param b Node number of the other descendent
 #' @return Integer node ID of the most recent common ancestor
-#' @export
+#' @noRd
 rcpp_getMRCA <- function(tree_ptr, a, b) {
     .Call(`_phylowise_rcpp_getMRCA`, tree_ptr, a, b)
 }

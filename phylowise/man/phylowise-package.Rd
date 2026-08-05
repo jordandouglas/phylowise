@@ -21,10 +21,6 @@ Useful links:
 Authors:
 \itemize{
   \item Jordan Douglas \email{jordan.douglas@auckland.ac.nz}
-}
-
-Other contributors:
-\itemize{
   \item Lindell Bromham
 }
 

@@ -32,8 +32,7 @@
 #' traits1 <- simulateTrait(time.tree)
 #' traits1.leaf <- traits1[1:ntips]
 #'
-#' # Simulate substitutions that have a positive association with traits, 
-#  # and 10000 substitutions per unit of time
+#' # Simulate substitutions that have a positive association with traits
 #' sim.result <- simulateSubstitutions(time.tree=time.tree, 
 #'										beta=1, 
 #'										theta=10, 
@@ -509,8 +508,7 @@ sampleTaxonPairs = function(subst.tree, covariate, dist.min, dist.max=Inf, respo
 #' traits1 <- simulateTrait(time.tree)
 #' traits1.leaf <- traits1[1:ntips]
 #'
-#' # Simulate substitutions that have a positive association with traits, 
-#  # and 10000 substitutions per unit of time
+#' # Simulate substitutions that have a positive association with traits
 #' sim.result <- simulateSubstitutions(time.tree=time.tree, 
 #'										beta=1, 
 #'										theta=10, 

@@ -41,7 +41,7 @@ ntips = length(time.tree$tip.label)
 traits1 <- simulateTrait(time.tree)
 traits1.leaf <- traits1[1:ntips]
 
-# Simulate substitutions that have a positive association with traits, 
+# Simulate substitutions that have a positive association with traits
 sim.result <- simulateSubstitutions(time.tree=time.tree, 
 									beta=1, 
 									theta=10, 
