@@ -12,18 +12,18 @@ The simulations consist of three components:
 The following comparative methods will test for an association between rates and traits. Because traits are independent of rates, we would hope for all p-values to be distributed as Uniform(0,1).
 
 1. Phylogenetic pairwise contrasts (PPC)
-1.1. No nesting, no maximisation
-1.2. No nesting, maximisation
-1.3. Nesting, no maximisation
-1.4. Nesting,  maximisation
+    1. No nesting, no maximisation
+    2. No nesting, maximisation
+    3. Nesting, no maximisation
+    4. Nesting,  maximisation
 2. Ordinary least squares (OLS)
 3. Phylogenetic generalised least squares (PGLS)
-3.1. Brownian
-3.2. Pagel
-3.3. Grafen
-3.4. Martins
-3.5. Blomberg
-
+    1. Brownian
+    2. Pagel
+    3. Grafen
+    4. Martins
+    5. Blomberg
+   
 These will be run across different error models of trait and rate.
 	
 
