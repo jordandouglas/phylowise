@@ -18,11 +18,14 @@ PPC (Phylogenetic Pairwise Contrast) is a phylogenetic comparative method for fi
 
 
 ## Directories
-```
-cases -- R scripts for the two case studies (plants and mammals)
-phylowise -- source code for the R package
-simulation -- R scripts to reproduce the simulation studies
-```
+
+`phylowise/` - R and C++ code for the phylowise package
+
+`simulation/` - R scripts to test PPC and PGLS using simulation studies (false positives and statistical power)
+
+`cases/` - R scripts for the two biological case studies (heights in flowering plants and life history in mammals)
+
+
 
 
 ## References
