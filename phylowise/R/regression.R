@@ -137,7 +137,7 @@ PPC.test = function(pairs.df, standardise=2, logY=TRUE, extreme.value.threshold=
 		#xz = abs(scale(x))
 		remove = which(yz > extreme.value.threshold) # Remove anything more than a few sd from the mean
 		if (length(remove) > 0){
-			cat(paste("Removing", length(remove), "extreme values\n"))
+			#cat(paste("Removing", length(remove), "extreme values\n"))
 			data.df = data.df[-remove,]
 		}
 	}
