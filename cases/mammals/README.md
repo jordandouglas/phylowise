@@ -1,6 +1,6 @@
 # Mammals
 
-In this case study we will explore associations between substitution rates and life history traits in mammals. This will be based on phylogenies from Douglas and Bromham 2025. Those trees were inferred under a multispecies coalescent tree with branch lengths expressed as number of synonmyous (nS) or non-synonymous (nN) changes. These counts were estimated via the [BeastMap](https://github.com/jordandouglas/BeastMap) package for BEAST 2.  
+In this case study we will explore associations between substitution rates and life history traits in mammals. This will be based on phylogenies from Douglas and Bromham 2025. Those trees were inferred under a multispecies coalescent tree with branch lengths expressed as number of synonymous (nS) or non-synonymous (nN) changes. These counts were estimated via the [BeastMap](https://github.com/jordandouglas/BeastMap) package for BEAST 2.  
 
 The `data` folder contains a posterior distribution of these trees + substitutions (downsampled to a small number to improve processing times) and species traits sourced from Pantheria (Jones et al. 2009) and AnAge (Magalhães et al. 2009).
 	
