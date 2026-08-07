@@ -233,10 +233,7 @@ for (trial in 1:ntrials){
 								pgls.p.st = tryCatch({
 									pgls = gls(leaf.rates~leaf.traits.nonzero, correlation=corBrownian(1,subst.tree.nonzero.rates), method="ML")
 									pgls.result = summary(pgls)
-									
-									# Return a p-value of 1 if the slope is negative
-									slope = pgls.result$coefficients[2]
-									ifelse(slope <= -Inf, 1, pgls.result$tTable[2,4])
+									pgls.result$tTable[2,4]
 								}, error = function(e) {
 								  	NA
 								})
@@ -250,10 +247,7 @@ for (trial in 1:ntrials){
 								pgls.p.tt = tryCatch({
 									pgls = gls(leaf.rates~leaf.traits.nonzero, correlation=corBrownian(1,time.tree.nonzero.rates), method="ML")
 									pgls.result = summary(pgls)
-									
-									# Return a p-value of 1 if the slope is negative
-									slope = pgls.result$coefficients[2]
-									ifelse(slope <= -Inf, 1, pgls.result$tTable[2,4])
+									pgls.result$tTable[2,4]
 								}, error = function(e) {
 								  	NA
 								})
@@ -268,10 +262,7 @@ for (trial in 1:ntrials){
 									pgls.lambda.p = tryCatch({
 										pgls = gls(leaf.rates~leaf.traits.nonzero, correlation=corPagel(initVal, time.tree.nonzero.rates,fixed = FALSE), method="ML")
 										pgls.result = summary(pgls)
-										
-										# Return a p-value of 1 if the slope is negative
-										slope = pgls.result$coefficients[2]
-										ifelse(slope <= -Inf, 1, pgls.result$tTable[2,4])
+										pgls.result$tTable[2,4]
 									}, error = function(e) {
 									  	NA
 									})
@@ -300,10 +291,7 @@ for (trial in 1:ntrials){
 									pgls.ou.p = tryCatch({
 										pgls = gls(leaf.rates~leaf.traits.nonzero, correlation=corMartins(initVal, time.tree.nonzero.rates,fixed = FALSE), method="ML")
 										pgls.result = summary(pgls)
-										
-										# Return a p-value of 1 if the slope is negative
-										slope = pgls.result$coefficients[2]
-										ifelse(slope <= -Inf, 1, pgls.result$tTable[2,4])
+										pgls.result$tTable[2,4]
 									}, error = function(e) {
 									  	NA
 									})
@@ -332,10 +320,7 @@ for (trial in 1:ntrials){
 									pgls.rho.p = tryCatch({
 										pgls = gls(leaf.rates~leaf.traits.nonzero, correlation=corGrafen(initVal, time.tree.nonzero.rates,fixed = FALSE), method="ML")
 										pgls.result = summary(pgls)
-										
-										# Return a p-value of 1 if the slope is negative
-										slope = pgls.result$coefficients[2]
-										ifelse(slope <= -Inf, 1, pgls.result$tTable[2,4])
+										pgls.result$tTable[2,4]
 									}, error = function(e) {
 									  	NA
 									})
@@ -362,10 +347,7 @@ for (trial in 1:ntrials){
 									pgls.blomberg.p = tryCatch({
 										pgls = gls(leaf.rates~leaf.traits.nonzero, correlation=corBlomberg(initVal, time.tree.nonzero.rates,fixed = FALSE), method="ML")
 										pgls.result = summary(pgls)
-
-										# Return a p-value of 1 if the slope is negative
-										slope = pgls.result$coefficients[2]
-										ifelse(slope <= -Inf, 1, pgls.result$tTable[2,4])
+										pgls.result$tTable[2,4]
 									}, error = function(e) {
 									  	NA
 									})
