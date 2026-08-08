@@ -353,11 +353,11 @@ sampleTaxonPairs = function(subst.tree, covariate, dist.min, dist.max=Inf, respo
 
 		# This should not happen but the check is here just to be safe
 		if (any(pairs.df$tip1 == tip1) | any(pairs.df$tip2 == tip1)){
-			print("Unexpeced dev error 1")
+			#print("Unexpeced dev error 1")
 			next
 		}
 		if (any(pairs.df$tip1 == tip2) | any(pairs.df$tip2 == tip2)){
-			print("Unexpected dev error 2")
+			#print("Unexpected dev error 2")
 			next
 		}
 
@@ -465,9 +465,9 @@ sampleTaxonPairs = function(subst.tree, covariate, dist.min, dist.max=Inf, respo
 	if (pair.num > 1){
 		all.included = table(c(pairs.df$tip1[1:(pair.num)], pairs.df$tip2[1:(pair.num)]))
 		if (length(all.included) > 0 && max(all.included) > 1){
-			print(all.included)
-			print(pairs.df)
-			stop("Warning: detected multiple copies of the same taxon!!!\n\n")
+			#print(all.included)
+			#print(pairs.df)
+			stop("Error: detected multiple copies of the same taxon")
 		}
 	}
 
@@ -499,6 +499,7 @@ sampleTaxonPairs = function(subst.tree, covariate, dist.min, dist.max=Inf, respo
 #' @param edge.width edge line width of all branches on the tree
 #' @param edge.width.pairs edge line width of paired branches 
 #' @param label.cex tree tip label font size, if show.tip.label=TRUE  
+#' @return No return value, function is called to make a plot
 #' @examples
 #' # Sample a birth-death tree with 100 taxa
 #' time.tree <- ape::rphylo(birth=10, death=5, n=100)

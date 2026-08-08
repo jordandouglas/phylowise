@@ -58,13 +58,13 @@ PPC.test = function(pairs.df, standardise=2, logY=TRUE, extreme.value.threshold=
 
 	d.all = c(pairs.df$d1, pairs.df$d2)
 	if (all(d.all == 0)) {
-		cat(paste("All distances are 0!\n"))
+		warning("All distances are 0")
 		result = list(p.var=NA, rho.var=NA, t.values=NA, n=nrow(pairs.df), data.df=NA)
 		return(result)
 	}
 
 	if (logY & any(d.all < 0)) {
-		cat(paste("Some terms are negative! Try with logY=FALSE \n"))
+		warning("Some terms are negative! Try with logY=FALSE")
 		result = list(p.var=NA, rho.var=NA, t.values=NA, n=nrow(pairs.df), data.df=NA)
 		return(result)
 	}
@@ -167,7 +167,7 @@ PPC.test = function(pairs.df, standardise=2, logY=TRUE, extreme.value.threshold=
 		bma =  tryCatch({
 			BMA::bic.glm(x = data.frame(trait=data.df[,var]), y = data.df$distance.response, glm.family=gaussian(), prior.param=prior.weight, OR=OR)
 		}, error = function(e) {
-			cat(paste("BMA error:", e, "\n"))
+			warning(paste("BMA error caught:", e))
 		  	NA
 		})
 		bma.all[[var]] = bma

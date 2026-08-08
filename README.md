@@ -15,7 +15,16 @@ PPC (Phylogenetic Pairwise Contrast) is a phylogenetic comparative method for fi
 
 ## Installation
 
+phylowise is not yet available through CRAN. In the meantime, please install by:
 
+
+```
+library(devtools)
+install.packages("/path/to/phylowise/phylowise", repos = NULL, type = "source")
+
+```
+
+Documentation can be found in the `phylowise-manual.pdf` file
 
 ## Directories
 

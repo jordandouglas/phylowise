@@ -29,6 +29,9 @@ plotPairs(
 
 \item{label.cex}{tree tip label font size, if show.tip.label=TRUE}
 }
+\value{
+No return value, function is called to make a plot
+}
 \description{
 Plot a set of sampled pairs onto a tree
 }
