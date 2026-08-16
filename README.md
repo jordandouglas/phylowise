@@ -41,4 +41,4 @@ Documentation can be found in the `phylowise-manual.pdf` file
 
 
 
-
+Jordan Douglas and Lindell Bromham. Searching for patterns in rate of molecular evolution using phylogenetic pairwise contrasts (2026). BiorXiv. [https://doi.org/10.64898/2026.08.13.744736](https://doi.org/10.64898/2026.08.13.744736).

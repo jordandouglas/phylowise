@@ -1,0 +1,9 @@
+bibentry(
+  bibtype  = "Misc",
+  title    = "Searching for patterns in rate of molecular evolution using phylogenetic pairwise contrasts",
+  author   = c(person("Jordan", "Douglas"), person("Lindell", "Bromham")),
+  year     = "2026",
+  note     = "bioRxiv",
+  doi      = "10.64898/2026.08.13.744736",
+  url      = "https://doi.org/10.64898/2026.08.13.744736"
+)
