@@ -93,9 +93,9 @@ readBeastTrees = function(nexus.file, burnin=0.1) {
     trees.burnin = list(trees)
   }else{
 
-
-    trees.burnin = list()
+    
     if (length(trees) > 1 & burnin > 0){
+      trees.burnin = list()
       b = ceiling(burnin * length(trees)):length(trees)
       if (b[1] == 0){
         b = b[-1]
@@ -108,7 +108,7 @@ readBeastTrees = function(nexus.file, burnin=0.1) {
       }
       trees.burnin
     }else{
-      trees.burnin[[1]] = trees
+      trees.burnin = trees
     }
   
 

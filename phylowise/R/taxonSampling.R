@@ -26,7 +26,7 @@
 #' @examples
 #' # Sample a birth-death tree with 100 taxa
 #' time.tree <- ape::rphylo(birth=10, death=5, n=100)
-#' ntips = length(time.tree$tip.label)
+#' ntips <- length(time.tree$tip.label)
 #'
 #' # Simulate traits down the tree under Brownian motion
 #' traits1 <- simulateTrait(time.tree)
@@ -503,7 +503,7 @@ sampleTaxonPairs = function(subst.tree, covariate, dist.min, dist.max=Inf, respo
 #' @examples
 #' # Sample a birth-death tree with 100 taxa
 #' time.tree <- ape::rphylo(birth=10, death=5, n=100)
-#' ntips = length(time.tree$tip.label)
+#' ntips <- length(time.tree$tip.label)
 #'
 #' # Simulate traits down the tree under Brownian motion
 #' traits1 <- simulateTrait(time.tree)
