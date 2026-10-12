@@ -72,7 +72,7 @@ max.wall.time = 10
 
 
 # False discovery rate
-trait.methods = c("BM") 
+trait.methods = c("TD") 
 tree.dirs = c("../newick/")
 
 setTimeLimit(cpu = Inf, elapsed = Inf, transient = FALSE)  # Reset limits
@@ -110,7 +110,7 @@ for (trial in 1:ntrials){
 				clock.sigma.sd = 0.4
 				clock.sigma = rlnorm(1, log(clock.sigma.mean) - 0.5*clock.sigma.sd^2, clock.sigma.sd)
 			}else{
-				theta = rexp(1, 0.1)
+				theta = rexp(1, 1)
 				V = 0.2
 				clock.sigma = sqrt(V*2*theta) 
 			}

@@ -5,7 +5,7 @@ This folder contains the scripts for assessing the false positive rate (Type I e
 The simulations consist of three components:
 
 1. Time trees. These are all precomputed and stored in the `../newick` folder.
-2. Traits. These are simulated under the tree using Brownian motion.
+2. Traits. These are simulated under the tree using an OU process.
 3. Substitution counts and rates. These are simulated down the time tree independently of the traits. By default, these are simulated under an autocorrelated clock model, where the log-rate wanders down the tree via Brownian motion.
 
 
